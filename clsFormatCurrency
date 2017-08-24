@@ -61,4 +61,17 @@ public class clsFormatCurrency {
 		}
 		return FormatCurrency(sValue, sCurrencySymbol, sThousandDelimiter, sDecimalDelimiter)
 	}
+    
+    //Freebie to identify the best CSV Delimiter based on the Locale
+    public static String getCSVDelimiter(){
+        Decimal nSampleValue = 1234.56;
+		String sFormattedValue = nSampleValue.format();
+		String sDecimalDelimiter = sFormattedValue.substring(5,6);
+        if (sDecimalDelimiter.trim() == ','){
+            return ';'; //if the decimal delimiter is comma, use ;, else use comma.
+        }
+        else{
+            return ',';
+        }
+    }
 }
