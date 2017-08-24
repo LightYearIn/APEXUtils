@@ -9,6 +9,7 @@ Input: 1234567890.0123
 Method Call:
 
   String sValue = '1234567890.0123';
+  
   System.debug(clsFormatCurrency.FormatCurrencyByCurrentUserLocale(sValue, true));
 
 Output: EUR 1.234.567.890,0123
