@@ -7,6 +7,7 @@ Description: Pass an unformatted Decimal in String format (for example, 12345678
 Input: 1234567890.0123
 
 Method Call:
+
   String sValue = '1234567890.0123';
   System.debug(clsFormatCurrency.FormatCurrencyByCurrentUserLocale(sValue, true));
 
