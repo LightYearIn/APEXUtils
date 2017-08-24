@@ -40,7 +40,10 @@ public class clsFormatCurrency {
 			}
 			
         }
-        return sCurrencySymbol + sNewValue;
+        if(sCurrencySymbol != '')
+        	return sCurrencySymbol.trim() + ' ' + sNewValue;
+        else
+            return sNewValue;
     }
 	
 	public static String FormatCurrencyByCurrentUserLocale (String sValue, boolean bShowCurrencySymbol)
