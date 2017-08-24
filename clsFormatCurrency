@@ -1,0 +1,61 @@
+/*
+*Author: LBK
+*Description: This class takes a decimal value and formats it according to current user's Locale settings (Currency symbol, thousand delimiter and decimal delimiter)
+*Date: 24.Aug.2017
+*/
+public class clsFormatCurrency {
+    public static String FormatCurrency(String sValue, String sCurrencySymbol, String sThousandDelimiter, String sDecimalDelimiter){
+        String sAfterDecimal = '';
+        String sNewValue = '';
+ 
+        if(sValue.contains('.')){
+            String[] arrValues = sValue.split('\\.');
+            sValue = arrValues[0];
+            sAfterDecimal = arrValues[1];
+        }
+        while(sValue.length() > 0){
+            String sInterimValue = '';
+            if(sValue.length() <= 3){
+                sInterimValue = sValue;
+                sValue = '';
+            }
+            else{
+                sInterimValue = sValue.right(3);
+                sValue = sValue.left(sValue.length() - 3);
+            }
+            if(String.isEmpty(sNewValue)){
+                sNewValue = sInterimValue;
+            }
+            else{
+                sNewValue = sInterimValue + sThousandDelimiter + sNewValue;
+            }
+        }
+ 
+        if(!String.isEmpty(sAfterDecimal)){
+			if(sDecimalDelimiter == null || sDecimalDelimiter == ''){
+				sNewValue = sNewValue + '.' + sAfterDecimal;
+			}
+			else{
+				sNewValue = sNewValue + sDecimalDelimiter + sAfterDecimal;
+			}
+			
+        }
+        return sCurrencySymbol + sNewValue;
+    }
+	
+	public static String FormatCurrencyByCurrentUserLocale (String sValue, boolean bShowCurrencySymbol)
+	{
+		//Thank you Andrew Fawcett for the following great four lines of code
+		Decimal nSampleValue = 1234.56;
+		String sFormattedValue = nSampleValue.format();
+		String sThousandDelimiter = sFormattedValue.substring(1,2);
+		String sDecimalDelimiter = sFormattedValue.substring(5,6);
+		
+		String sCurrencySymbol = '';
+		
+		if(bShowCurrencySymbol){
+			sCurrencySymbol = UserInfo.getDefaultCurrency()
+		}
+		return FormatCurrency(sValue, sCurrencySymbol, sThousandDelimiter, sDecimalDelimiter)
+	}
+}
